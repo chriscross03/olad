@@ -5,8 +5,11 @@ function App() {
   const [entries, setEntries] = useState({});
 
   useEffect(() => {
-    fetch("/entries.json")
-      .then((res) => res.json())
+    fetch(`${process.env.PUBLIC_URL}/entries.json`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
       .then((data) => setEntries(data))
       .catch((err) => console.error("Error loading entries:", err));
   }, []);
