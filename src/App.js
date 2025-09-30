@@ -2,53 +2,51 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
-  const today = new Date().toISOString().split("T")[0];
   const [entries, setEntries] = useState({});
-  const [text, setText] = useState("");
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("diary")) || {};
-    setEntries(saved);
-    if (saved[today]) setText(saved[today]);
-  }, [today]);
-
-  const handleSave = (value) => {
-    setText(value);
-    const updated = { ...entries, [today]: value };
-    setEntries(updated);
-    localStorage.setItem("diary", JSON.stringify(updated));
-  };
+    fetch("/entries.json")
+      .then((res) => res.json())
+      .then((data) => setEntries(data))
+      .catch((err) => console.error("Error loading entries:", err));
+  }, []);
 
   const sortedDates = Object.keys(entries).sort();
 
   return (
-    <div className="app">
+    <div className="container">
       <h1 className="title">One Line a Day</h1>
-
-      <div className="today">
-        <label className="date">{today}</label>
-        {entries[today] ? (
-          <p className="entry">{entries[today]}</p>
-        ) : (
-          <input
-            className="input"
-            type="text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSave(text)}
-            placeholder="Write one line..."
-          />
-        )}
-        <button
-          className="reset"
-          onClick={() => {
-            localStorage.removeItem("diary");
-            window.location.reload();
-          }}
+      <p className="description">
+        What follows is a simple record of my life, written one day at a time.
+        Each date holds a single line, a brief fragment of thought or memory.
+        Over time, these lines form a quiet timeline of days gone by. The
+        collection is not exhaustive, nor is it perfect—just a small practice in
+        noticing. This project was inspired by Rory Flint's{" "}
+        <a
+          href="https://days.rory.codes/"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Reset
-        </button>
-      </div>
+          Day by Day
+        </a>
+        , Buster Benson’s{" "}
+        <a
+          href="https://busterbenson.com/life-in-weeks/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Life in Weeks
+        </a>
+        , and a{" "}
+        <a
+          href="https://waitbutwhy.com/2014/05/life-weeks.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          blog post
+        </a>{" "}
+        by Tim Urban.
+      </p>
 
       <div className="past">
         <h2>Your Entries</h2>
