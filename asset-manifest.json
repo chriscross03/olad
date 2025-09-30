@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/olad/static/css/main.8b95aad6.css",
-    "main.js": "/olad/static/js/main.06bc8e0c.js",
+    "main.js": "/olad/static/js/main.79295cb7.js",
     "static/js/453.69114b23.chunk.js": "/olad/static/js/453.69114b23.chunk.js",
     "index.html": "/olad/index.html",
     "main.8b95aad6.css.map": "/olad/static/css/main.8b95aad6.css.map",
-    "main.06bc8e0c.js.map": "/olad/static/js/main.06bc8e0c.js.map",
+    "main.79295cb7.js.map": "/olad/static/js/main.79295cb7.js.map",
     "453.69114b23.chunk.js.map": "/olad/static/js/453.69114b23.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8b95aad6.css",
-    "static/js/main.06bc8e0c.js"
+    "static/js/main.79295cb7.js"
   ]
 }
